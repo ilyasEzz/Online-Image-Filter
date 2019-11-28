@@ -34,6 +34,7 @@ uploadFile.addEventListener("change", e => {
         canvas.height = img.height;
         // drawImage(the image itself, when to start from x, ehen to start from y)
         ctx.drawImage(img, 0, 0);
+        canvas.removeAttribute("data-caman-id");
       };
     });
   }

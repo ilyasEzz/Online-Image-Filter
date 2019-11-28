@@ -84,9 +84,37 @@ document.addEventListener("click", e => {
       Caman("#canvas", img, function() {
         this.vibrance(-5).render();
       });
-    } else if (e.target.classList.contains("vibrance-remove")) {
+    } else if (e.target.classList.contains("add-vintage")) {
       Caman("#canvas", img, function() {
-        this.vibrance(-5).render();
+        this.vintage().render();
+      });
+    } else if (e.target.classList.contains("add-lomo")) {
+      Caman("#canvas", img, function() {
+        this.lomo().render();
+      });
+    } else if (e.target.classList.contains("add-clarity")) {
+      Caman("#canvas", img, function() {
+        this.clarity().render();
+      });
+    } else if (e.target.classList.contains("add-sinCity")) {
+      Caman("#canvas", img, function() {
+        this.sinCity().render();
+      });
+    } else if (e.target.classList.contains("add-pinhole")) {
+      Caman("#canvas", img, function() {
+        this.pinhole().render();
+      });
+    } else if (e.target.classList.contains("add-crossProcess")) {
+      Caman("#canvas", img, function() {
+        this.crossProcess().render();
+      });
+    } else if (e.target.classList.contains("add-nostalgia")) {
+      Caman("#canvas", img, function() {
+        this.nostalgia().render();
+      });
+    } else if (e.target.classList.contains("add-herMajesty")) {
+      Caman("#canvas", img, function() {
+        this.herMajesty().render();
       });
     }
   }

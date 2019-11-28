@@ -56,7 +56,6 @@ document.addEventListener("click", e => {
         this.brightness(-5).render();
       });
     } else if (e.target.classList.contains("contrast-add")) {
-      console.log(123);
       Caman("#canvas", img, function() {
         this.contrast(5).render();
       });
@@ -118,4 +117,11 @@ document.addEventListener("click", e => {
       });
     }
   }
+});
+
+// Remove Filters
+revertBtn.addEventListener("click", function() {
+  Caman("#canvas", img, function() {
+    this.revert();
+  });
 });

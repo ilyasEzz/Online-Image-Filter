@@ -7,26 +7,21 @@ const ctx = canvas.getContext("2d");
 
 let img = new Image();
 let fileName = "";
+let fileExtension = "";
 
 //Upload File
 uploadFile.addEventListener(
   "change",
   e => {
-    // get file
     const file = document.getElementById("upload-file").files[0];
-
-    // init FileReader
     const reader = new FileReader();
 
     if (file) {
-      // set File Name
       fileName = file.name;
-      // Read data as url
       reader.readAsDataURL(file);
 
       // Add image to Canvas
       reader.addEventListener("load", () => {
-        // creating the image
         img = new Image();
         img.src = reader.result;
 
@@ -34,7 +29,7 @@ uploadFile.addEventListener(
         img.onload = function() {
           canvas.width = img.width;
           canvas.height = img.height;
-          // drawImage(the image itself, when to start from x, ehen to start from y)
+          // drawImage(the image itself, when to start from x, hen to start from y)
           ctx.drawImage(img, 0, 0);
           canvas.removeAttribute("data-caman-id");
         };
@@ -60,14 +55,10 @@ document.addEventListener("click", e => {
         this.contrast(5).render();
       });
     } else if (e.target.classList.contains("contrast-remove")) {
-      console.log(123);
-
       Caman("#canvas", img, function() {
         this.contrast(-5).render();
       });
     } else if (e.target.classList.contains("saturation-add")) {
-      console.log(123);
-
       Caman("#canvas", img, function() {
         this.saturation(5).render();
       });
@@ -125,3 +116,35 @@ revertBtn.addEventListener("click", function() {
     this.revert();
   });
 });
+
+downloadBtn.addEventListener("click", e => {
+  [fileName, fileExtension] = getExtension(fileName);
+
+  if (isImage(fileExtension)) {
+    fileName += "-edited";
+    download(fileName, canvas);
+  }
+});
+
+function isImage(extension) {
+  return extension === "jpg" ||
+    extension === "jpeg" ||
+    extension === "png" ||
+    extension === "svg"
+    ? true
+    : false;
+}
+
+function getExtension(filename) {
+  return filename.split(".");
+}
+
+function download(filename, canvas) {
+  let e;
+  const link = document.createElement("a");
+  link.download = filename;
+  link.href = canvas.toDataURL("image/jpeg", 0.8);
+
+  e = new MouseEvent("click");
+  link.dispatchEvent(e);
+}

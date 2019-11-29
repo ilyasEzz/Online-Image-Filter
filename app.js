@@ -8,6 +8,7 @@ const ctx = canvas.getContext("2d");
 let img = new Image();
 let fileName = "";
 let fileExtension = "";
+let painting = false;
 
 //Upload File
 uploadFile.addEventListener(
@@ -29,7 +30,7 @@ uploadFile.addEventListener(
         img.onload = function() {
           canvas.width = img.width;
           canvas.height = img.height;
-          // drawImage(the image itself, when to start from x, hen to start from y)
+
           ctx.drawImage(img, 0, 0);
           canvas.removeAttribute("data-caman-id");
         };
@@ -59,6 +60,8 @@ document.addEventListener("click", e => {
         this.contrast(-5).render();
       });
     } else if (e.target.classList.contains("saturation-add")) {
+      console.log(123);
+
       Caman("#canvas", img, function() {
         this.saturation(5).render();
       });
@@ -110,6 +113,12 @@ document.addEventListener("click", e => {
   }
 });
 
+canvas.addEventListener("mousedown", startPosition);
+canvas.addEventListener("mouseup", endPosition);
+canvas.addEventListener("mousemove", e => {
+  draw(e);
+});
+
 // Remove Filters
 revertBtn.addEventListener("click", function() {
   Caman("#canvas", img, function() {
@@ -147,4 +156,27 @@ function download(filename, canvas) {
 
   e = new MouseEvent("click");
   link.dispatchEvent(e);
+}
+
+function startPosition(e) {
+  painting = true;
+  draw(e);
+  return painting;
+}
+
+function endPosition() {
+  painting = false;
+  ctx.beginPath();
+  return painting;
+}
+
+function draw(e) {
+  if (!painting) return;
+  ctx.lineWidth = 8;
+  ctx.lineCap = "round";
+
+  ctx.lineTo(e.clientX, e.clientY);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(e.clientX, e.clientY);
 }

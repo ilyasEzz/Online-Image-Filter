@@ -1,0 +1,23 @@
+{
+  "name": "online-image-filter",
+  "version": "1.0.0",
+  "description": "An Online Image filter using Camanjs",
+  "main": "index.js",
+  "dependencies": {
+    "gh-pages": "^3.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "deploy": "gh-pages -d dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ilyasEzz/Online-Image-Filter.git"
+  },
+  "author": "Ilyas Ezzahid",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ilyasEzz/Online-Image-Filter/issues"
+  },
+  "homepage": "https://github.com/ilyasEzz/Online-Image-Filter#readme"
+}
